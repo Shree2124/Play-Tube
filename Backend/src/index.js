@@ -3,22 +3,30 @@
 // require('dotenv').config({path: './env'})
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
-import { app } from "./app.js";
+import express from "express";
+// import { app } from "./app.js";
+const app = express();
+
+
+
 
 dotenv.config({
-  path: "./.env",
+    path: "./.env",
 });
 
 connectDB()
-  .then(() => {
+.then(() => {
     app.listen(process.env.PORT || 8000, () =>
-      console.log(`Server is running at port : ${process.env.PORT}`)
+    console.log(`Server is running at port : ${process.env.PORT}`)
     );
-  })
-  .catch((error) =>
-    console.log("MONGODB CONNECTION ERROR in index.js: ", error)
-  );
+})
+.catch((error) =>
+console.log("MONGODB CONNECTION ERROR in index.js: ", error)
+);
 
+app.get("/", (req, res)=>{
+    res.send("Hello")
+})
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -26,9 +34,7 @@ app.use(
   })
 );
 
-app.get("/", (req, res)=>{
-    res.send("Hello")
-})
+
 
 /*
 // TODO: ⁡⁢⁢⁢first approch to connect db
