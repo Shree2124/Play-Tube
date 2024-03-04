@@ -1,5 +1,5 @@
 import express, { json } from "express";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 // import { PORT, PROJECT_ID } from "./config.js";
 // import { Book } from "./models/books.models.js";
 // import booksRoutes from './routes/books.routes.js'
@@ -25,7 +25,7 @@ app.use(cors({
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true
 }))
-app.use('/users',router);
+// app.use('/users',router);
 
 app.get("/", (req, res) => {
   res.send("hello");
