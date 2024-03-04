@@ -14,6 +14,24 @@ dotenv.config({
     path: "./.env",
 });
 
+
+app.use(
+    cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+})
+);
+
+import userRouter from "./routes/user.routes.js";
+
+// routes declaration
+app.use("/api/v1/users", userRouter);
+// url: -http://localhost:8000/api/v1/users/${route}
+
+app.get("/",(req, res)=>{
+    res.send("Hello")
+})
+
 connectDB()
 .then(() => {
     app.listen(process.env.PORT || 8000, () =>
@@ -23,17 +41,6 @@ connectDB()
 .catch((error) =>
 console.log("MONGODB CONNECTION ERROR in index.js: ", error)
 );
-
-app.get("/", (req, res)=>{
-    res.send("Hello")
-})
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  })
-);
-
 
 
 /*

@@ -30,17 +30,17 @@ app.use(express.static("public"));
 // to perform CRUD operation on cookies:-
 app.use(cookieParser());
 
-app.get("/",(req, res)=>{
-  res.send("Hello")
-})
 
 // ⁡⁢⁣⁢+⁡ routes import
-import userRouter from "./routes/user.routes.js";
+// import userRouter from "./routes/user.routes.js";
 
-// routes declaration
-app.use("/api/v1/users", userRouter);
-// url: -http://localhost:8000/api/v1/users/${route}
+// // routes declaration
+// app.use("/api/v1/users", userRouter);
+// // url: -http://localhost:8000/api/v1/users/${route}
 
+// app.get("/",(req, res)=>{
+//   res.send("Hello")
+// })
 
 
 export { app };
