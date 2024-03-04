@@ -37,8 +37,7 @@ import userRouter from "./routes/user.routes.js";
 app.use("/api/v1/users", userRouter);
 // url: -http://localhost:8000/api/v1/users/${route}
 
-
-app.listen(8000,(req, res)=>{
+app.get("/",(req, res)=>{
   res.send("Hello")
 })
 

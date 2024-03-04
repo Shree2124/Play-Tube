@@ -14,7 +14,12 @@ connectDB()
 })
 .catch((error)=>console.log("MONGODB CONNECTION ERROR in index.js: ",error))
 
-
+app.use(
+    cors({
+      origin: process.env.CORS_ORIGIN,
+      credentials: true,
+    })
+  );
 
 
 
