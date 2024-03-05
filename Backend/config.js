@@ -1,4 +1,5 @@
 const PORT = 5555
+const DB_NAME = "TuneTube"
 
 
-export {PORT}
+export { PORT, DB_NAME }

@@ -1,11 +1,17 @@
 import express, { json } from "express";
 import { PORT } from "./config.js";
+import connectDB from "./db/index.js"
+import dotenv from "dotenv"
 import cors from "cors"
 
 const app = express();
 const Port = PORT || 3000;
 
 app.use(express.json());
+
+dotenv.config({
+  path: './.env'
+})
 
 app.use(cors({
   origin: "https://play-tube-iota.vercel.app",
@@ -16,6 +22,10 @@ app.use(cors({
 app.get("/", (req, res) => {
   res.send("hello");
 });
+
+connectDB()
+.then(()=>{console.log("MONGODB connection successfully completed");})
+.catch((err)=>{console.log("Connection err:- ",err);})
 
 app.get("/jokes", (req, res) => {
   const jokes = [
