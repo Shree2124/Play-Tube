@@ -8,7 +8,9 @@ const Port = PORT || 3000;
 app.use(express.json());
 
 app.use(cors({
-  origin: ""
+  origin: "https://play-tube-iota.vercel.app",
+  methods: ["GET","PUT","DELETE","UPDATE","PATCH"],
+  credentials: true
 }))
 
 app.get("/", (req, res) => {
