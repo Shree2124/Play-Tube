@@ -8,3 +8,6 @@ app.listen(8000,()=>{
 app.get("/",(req, res)=>{
     res.send("Hello")
 })
+app.get("/bo",(req, res)=>{
+    res.send("Bo")
+})
