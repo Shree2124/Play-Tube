@@ -1,10 +1,15 @@
 import express, { json } from "express";
 import { PORT } from "./config.js";
+import cors from "cors"
 
 const app = express();
 const Port = PORT || 3000;
 
 app.use(express.json());
+
+app.use(cors({
+  origin: ""
+}))
 
 app.get("/", (req, res) => {
   res.send("hello");
