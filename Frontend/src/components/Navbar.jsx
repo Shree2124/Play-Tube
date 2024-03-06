@@ -36,6 +36,7 @@ position: fixed;
   width: 100%;
   z-index: 10;
   background-color: #fff;
+  
 `;
 
 const Section = styled.div`
@@ -45,6 +46,7 @@ const Section = styled.div`
   width: 100%;
   position: relative;
   gap: 20rem;
+  border-bottom: 1px solid gray;
 `;
 
 const IconAndLogoSection = styled.div`

@@ -8,7 +8,9 @@ function App() {
       <Navbar />
       <InnerDiv>
         <Sidebar />
-        <Outlet />
+        <OutletDiv>
+          <Outlet />
+        </OutletDiv>
       </InnerDiv>
     </OutterDiv>
   );
@@ -16,12 +18,25 @@ function App() {
 
 const OutterDiv = styled.div`
   margin-top: 0;
-
 `;
 
 const InnerDiv = styled.div`
   display: flex;
-  gap: 4rem;
+ 
 `;
+
+const OutletDiv = styled.div`
+margin: auto;
+margin-left: 16.5rem;
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+top: 0;
+overflow-y: scroll;
+overflow-x: hidden;
+height: 100%;
+width: 85%;
+`
 
 export default App;

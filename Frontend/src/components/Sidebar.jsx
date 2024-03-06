@@ -101,13 +101,13 @@ const Sidebar = () => {
 }
 
 const MainDiv = styled.div`
-    z-index: 10;
+    z-index: -1;
     margin-top: 3rem;
     width: 15%;
     border: 1px solid rgb(229 231 235/1);
     overflow-y: scroll;
     overflow-x: hidden;
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -124,7 +124,7 @@ const ItemDiv = styled.div`
 const Field = styled.p`
     margin-left: 2.5rem;
     font-size: 1.25rem/* 20px */;
-    line-height: 1.75rem/* 28px */;
+
 
 `
 
