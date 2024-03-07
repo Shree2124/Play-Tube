@@ -2,7 +2,11 @@ import "./App.css";
 import styled from "styled-components";
 import { Navbar, Sidebar } from "./components";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import VideoContainer from "./components/VideoContainer";
 function App() {
+  const auth = useSelector((state) => state.auth.status);
+
   return (
     <OutterDiv>
       <Navbar />
@@ -17,26 +21,19 @@ function App() {
 }
 
 const OutterDiv = styled.div`
-  margin-top: 0;
+  overflow: hidden;
 `;
 
 const InnerDiv = styled.div`
   display: flex;
- 
 `;
 
 const OutletDiv = styled.div`
-margin: auto;
-margin-left: 16.5rem;
-position: absolute;
-left: 0;
-right: 0;
-bottom: 0;
-top: 0;
-overflow-y: scroll;
-overflow-x: hidden;
-height: 100%;
-width: 85%;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+`;
 
 export default App;

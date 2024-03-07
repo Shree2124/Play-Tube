@@ -1,42 +1,69 @@
 import React from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearch } from "react-icons/io5";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineVideoCall } from "react-icons/md";
+import Avatar from 'react-avatar';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setToggle } from "../redux/features/toggleSlice";
 
 const Navbar = () => {
+  const toggle = useSelector((state) => state.toggle.isClicked);
+  const auth = useSelector((state) => state.auth.status);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(setToggle(toggle));
+  };
   return (
     <Container>
       <Section>
         <IconAndLogoSection>
-          <RxHamburgerMenu size={"30px"} />
-          <LogoImage src="" alt="Logo" />
+          <RxHamburgerMenu size={"30px"} onClick={handleClick} />
+          <LogoImage src="../assets/tune-tube.svg" alt="Logo" />
         </IconAndLogoSection>
         <InputandSearchSection>
           <InputSection>
             <Input type="text" placeholder="Search" />
           </InputSection>
           <SearchButton>
-            <IoSearch size={"17px"} />
+            <IoSearch size={"22px"} />
           </SearchButton>
         </InputandSearchSection>
-        <AuthenticationButtons>
-          <LoginButton to='/login'>Log in</LoginButton>
-          <SignupButton to='/register'>Sign up</SignupButton>
-        </AuthenticationButtons>
+        {auth ? (
+          <div className="flex items-center gap-4 mx-6">
+            <MdOutlineVideoCall size={"30px"} />
+            <IoMdNotificationsOutline size={"30px"} />
+            <Avatar
+              src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              size={"35px"}
+              round="30px"
+            />
+          </div>
+        ) : (
+          <AuthenticationButtons>
+            <LoginButton to="/login">Log in</LoginButton>
+            <SignupButton to="/register">Sign up</SignupButton>
+          </AuthenticationButtons>
+        )}
       </Section>
     </Container>
   );
 };
 
 const Container = styled.div`
-position: fixed;
+  position: fixed;
   margin: 0;
+  padding: 0;
   display: flex;
   width: 100%;
   z-index: 10;
   background-color: #fff;
-  
+  min-width: 10px;
+
+
 `;
 
 const Section = styled.div`
@@ -46,7 +73,16 @@ const Section = styled.div`
   width: 100%;
   position: relative;
   gap: 20rem;
-  border-bottom: 1px solid gray;
+  @media only screen and (min-width:480px) and (max-width:768px){
+  width: 50%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media only screen and (max-width:478px){
+ /* flex-wrap: wrap; */
+ gap: 1rem;
+}
 `;
 
 const IconAndLogoSection = styled.div`
@@ -54,7 +90,7 @@ const IconAndLogoSection = styled.div`
   justify-content: center;
   align-items: start;
   gap: 1rem;
-  margin-left: 0.75rem ;
+  margin-left: 0.75rem;
 `;
 
 const LogoImage = styled.img`
@@ -82,6 +118,7 @@ const InputSection = styled.div`
 const Input = styled.input`
   border: none;
   width: 100%;
+  font-size: 15px;
   &:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
@@ -93,7 +130,6 @@ const SearchButton = styled.button`
   border-radius: 1.5rem;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  width: 10%;
   padding: 0.5rem 1rem 0.5rem 1rem;
 `;
 
@@ -101,22 +137,37 @@ const AuthenticationButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  width: 20%;
   gap: 2rem;
-  margin: 0;
+  margin-right: 2rem;
 `;
 const LoginButton = styled(Link)`
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  background-color: #212121;
-  color: #fff;
   text-decoration: none;
-  border-radius: 1.5rem;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid #fff;
+  border-radius: 2.5rem;
+  font-size: 20px;
+  background-color: #bfbcbf52;
+  color: black;
+  &:hover {
+    background-color: gray;
+    color: white;
+    transition: 0.2s ease-in-out;
+  }
 `;
 
 const SignupButton = styled(Link)`
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  background-color: #212121;
-  color: #fff;
   text-decoration: none;
-  border-radius: 1.5rem;
+  padding: 0.2rem 1rem;
+  border: 1px solid #fff;
+  border-radius: 2.5rem;
+  font-size: 20px;
+  background-color: #bfbcbf52;
+  color: black;
+  &:hover {
+    background-color: gray;
+    color: white;
+    transition: 0.2s ease-in-out;
+  }
 `;
 export default Navbar;
