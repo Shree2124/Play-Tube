@@ -17,14 +17,14 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("./public/temp"))
 
 // const CORS_ORIGIN = '*'
-
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  })
-);
-
+console.log("Before cors");
+// app.use(
+//   cors({
+//     origin: process.env.CORS_ORIGIN,
+//     credentials: true,
+//   })
+// );
+console.log("After cors");
 
 
 
@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 // routes:- 
 
 import userRouter from "./routes/user.routes.js";
-app.use("/user",userRouter);
+app.use("/api/user",userRouter);
 
 connectDB()
 .then(()=>{console.log("MONGODB connection successfully completed");})

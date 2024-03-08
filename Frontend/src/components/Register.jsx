@@ -26,7 +26,7 @@ const Register = () => {
     }
     await axios
       .post(
-        "https://play-tube-api.vercel.app/user/register",
+        "/api/user/register",
         data
       )
       .then((res) => {
