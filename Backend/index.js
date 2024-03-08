@@ -16,8 +16,10 @@ dotenv.config({
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("./public/temp"))
 
+const CORS_ORIGIN = '*'
+
 app.use(cors({
-  origin: [process.env.CORS_ORIGIN,'http://localhost:5173'],
+  origin: [CORS_ORIGIN,'http://localhost:5173'],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true
 }));
