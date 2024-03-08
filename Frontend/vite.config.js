@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy:{
       '/api': 'https://play-tube-api.vercel.app',
+      // '/api': "http://localhost:5555"
     }
   },
 })
