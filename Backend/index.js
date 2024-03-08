@@ -71,3 +71,6 @@ app.get("/jokes", (req, res) => {
 app.listen(Port, () => {
   console.log(`serve at http://localhost:${Port}`);
 });
+
+
+export {app}
