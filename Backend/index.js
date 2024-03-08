@@ -18,11 +18,11 @@ app.use(express.static("./public/temp"))
 
 // const CORS_ORIGIN = '*'
 
-// app.use(cors({
-//   origin: [CORS_ORIGIN,'http://localhost:5173'],
-//   methods: ["POST", "GET", "PUT", "DELETE"],
-//   credentials: true
-// }));
+app.use(cors({
+  origin: ['https://play-tube-iota.vercel.app','http://localhost:5173'],
+  methods: ["POST", "GET", "PUT", "DELETE"],
+  credentials: true
+}));
 
 
 
