@@ -29,8 +29,8 @@ const Register = () => {
         "/api/user/register",
         data
       )
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        console.log("res");
       })
       .catch((err) => console.log(err));
   };
