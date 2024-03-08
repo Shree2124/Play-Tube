@@ -1,7 +1,7 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import {Input,Button} from '../components/index'
+import { Input, Button } from "../components/index";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const Register = () => {
@@ -10,9 +10,9 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const {register,handleSubmit} = useForm();
+  const { register, handleSubmit } = useForm();
 
-  const submit = async()=>{
+  const submit = async () => {
     console.log("hello");
     console.log(fullName);
     console.log(username);
@@ -20,21 +20,25 @@ const Register = () => {
     console.log(email);
 
     await axios
-    .post("https://play-tube-api.vercel.app/user/register",{
-      fullName:fullName,
-      email: email,
-      username: username,
-      password: password,
-    }, {
-      headers: {
-        'Content-Type': "application/json"
-      }
-    })
-    .then((res)=>{
-      console.log(res);
-    })
-    .catch((err)=>console.log(err))
-  }
+      .post(
+        "https://play-tube-api.vercel.app/user/register",
+        {
+          fullName: fullName,
+          email: email,
+          username: username,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <RegisterDiv>
       <SubDiv>
@@ -52,17 +56,19 @@ const Register = () => {
             </p>
           </div>
         </div>
-        <Form onSubmit={handleSubmit(()=>submit())}>
+        <Form onSubmit={handleSubmit(() => submit())}>
           <ContentDiv>
             <Input
               label="Fullname: "
-              placeholder="Enter your Fullname: "  
+              placeholder="Enter your Fullname: "
               // value = {fullName}
               type="text"
               {...register("fullname", {
                 required: true,
               })}
-              onChange = {(e)=>{(setFullName(e.target.value))}}
+              onChange={(e) => {
+                setFullName(e.target.value);
+              }}
             />
             <Input
               label="Email: "
@@ -73,11 +79,11 @@ const Register = () => {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
-                  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                  "Email address must be a valid address",
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                    "Email address must be a valid address",
                 },
               })}
-              onChange = {(e)=>(setEmail(e.target.value))}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               label="Username: "
@@ -87,7 +93,7 @@ const Register = () => {
               {...register("Username", {
                 required: true,
               })}
-              onChange = {(e)=>(setUsername(e.target.value))}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <Input
               label="Password : "
@@ -97,7 +103,7 @@ const Register = () => {
               {...register("password", {
                 required: true,
               })}
-              onChange ={(e)=>(setPassword(e.target.value))}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
