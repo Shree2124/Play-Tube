@@ -18,7 +18,7 @@ function App() {
     .catch((err)=>{
       console.log("Error:- ",err);
     })
-  })
+  },[])
 
   return (
     <>

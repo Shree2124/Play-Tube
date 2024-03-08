@@ -26,7 +26,7 @@ console.log("Before cors");
 // );
 
 app.use(cors({
-  "origin": "*",
+  "origin": "https://play-tube-iota.vercel.app",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
   "optionsSuccessStatus": 204

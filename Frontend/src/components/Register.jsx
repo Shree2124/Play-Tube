@@ -12,27 +12,28 @@ const Register = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const submit = async () => {
+  const data = {
+    fullName: fullName,
+    email: email,
+    username: username,
+    password: password,
+  }
+
+  useEffect(async ()=>{
+    await axios.post("https://play-tube-api.vercel.app/user/register",data)
+    .then((res)=>{
+      setData(res.data)
+    })
+    .catch((err)=>{
+      console.log("Error:- ",err);
+    })
+  },[submit])
+  const submit = () => {
     console.log("hello");
     console.log(fullName);
     console.log(username);
     console.log(password);
     console.log(email);
-    const data = {
-      fullName: fullName,
-      email: email,
-      username: username,
-      password: password,
-    }
-    await axios
-      .post(
-        "https://play-tube-api.vercel.app/user/register",
-        data
-      )
-      .then(() => {
-        console.log("res");
-      })
-      .catch((err) => console.log("fetching error:- ",err));
   };
   return (
     <RegisterDiv>
