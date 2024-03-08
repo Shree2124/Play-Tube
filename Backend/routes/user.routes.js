@@ -8,6 +8,7 @@ const router = Router();
 router.post(
     "/register",
     asyncHandler(async (req, res)=>{
+        res.send("hello")
     const { fullName, email, username, password } = req.body;
   //console.log("email: ", email);
 
