@@ -3,8 +3,10 @@ import { User } from "../models/user.model.js";
 import { registerUser } from "../controller/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { app } from "../index.js";
 import cors from "cors";
+import express from "express"
+
+const app = express();
 
 app.use(
   cors({
@@ -15,6 +17,6 @@ app.use(
 );
 
 const router = Router();
-router.route("/").post(registerUser);
+router.route("/register").post(registerUser);
 
 export default router;

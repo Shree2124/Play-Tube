@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 // routes:- 
 
 import userRouter from "./routes/user.routes.js";
-app.use("/user/register",userRouter);
+app.use("/user",userRouter);
 
 connectDB()
 .then(()=>{console.log("MONGODB connection successfully completed");})
