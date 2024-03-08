@@ -19,6 +19,7 @@ const Register = () => {
     console.log(password);
     console.log(email);
   };
+  axios.defaults.withCredentials = true
   const data = {
     fullName: fullName,
     email: email,
@@ -29,6 +30,7 @@ const Register = () => {
   useEffect( ()=>{
      axios.post("https://play-tube-api.vercel.app/user/register",data)
     .then((res)=>{
+      console.log("Success ");
       setData(res.data)
     })
     .catch((err)=>{

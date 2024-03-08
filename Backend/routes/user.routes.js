@@ -5,6 +5,6 @@ import { upload } from "../middlewares/multer.middleware.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const router = Router();
-router.route("/register").post(registerUser);
+router.route("/").post(registerUser);
 
 export default router;

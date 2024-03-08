@@ -26,11 +26,10 @@ console.log("Before cors");
 // );
 
 app.use(cors({
-  "origin": "https://play-tube-iota.vercel.app",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
-}))
+  origin: ["https://play-tube-iota.vercel.app/"],
+  methods: ["POST", "GET", "PUT", "DELETE"],
+  credentials: true
+}));
 
 console.log("After cors");
 
@@ -43,7 +42,7 @@ app.get("/", (req, res) => {
 // routes:- 
 
 import userRouter from "./routes/user.routes.js";
-app.use("/user",userRouter);
+app.use("/user/register",userRouter);
 
 connectDB()
 .then(()=>{console.log("MONGODB connection successfully completed");})
