@@ -20,12 +20,7 @@ const Register = () => {
     console.log(email);
 
     axios
-    .post("https://play-tube-api.vercel.app/user/register",{
-      fullName,
-      email,
-      username,
-      password,
-    })
+    .get("https://play-tube-api.vercel.app/jokes")
     .then((res)=>{
       console.log(res);
     })

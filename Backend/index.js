@@ -17,8 +17,8 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("./public/temp"))
 
 app.use(cors({
-  origin: "https://play-tube-iota.vercel.app",
-  methods: ["GET","PUT","DELETE","UPDATE","PATCH","POST"],
+  origin: ['https://play-tube-iota.vercel.app','http://localhost:5173'],
+  methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true
 }));
 
