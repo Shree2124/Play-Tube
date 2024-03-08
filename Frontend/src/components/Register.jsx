@@ -1,13 +1,35 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import {Input,Button} from '../components/index'
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
   const {register,handleSubmit} = useForm();
 
   const submit = ()=>{
     console.log("hello");
+    console.log(fullName);
+    console.log(username);
+    console.log(password);
+    console.log(email);
+
+    axios
+    .post("https://play-tube-api.vercel.app/user/register",{
+      fullName,
+      email,
+      username,
+      password,
+    })
+    .then((res)=>{
+      console.log(res);
+    })
+    .catch((err)=>console.log(err))
   }
   return (
     <RegisterDiv>
@@ -30,40 +52,48 @@ const Register = () => {
           <ContentDiv>
             <Input
               label="Fullname: "
-              placeholder="Enter your Fullname: "
+              placeholder="Enter your Fullname: "  
+              // value = {fullName}
               type="text"
               {...register("fullname", {
                 required: true,
               })}
+              onChange = {(e)=>{(setFullName(e.target.value))}}
             />
             <Input
               label="Email: "
               placeholder="Enter your Email: "
               type="email"
+              // value = {email}
               {...register("email", {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
-                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                    "Email address must be a valid address",
+                  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                  "Email address must be a valid address",
                 },
               })}
+              onChange = {(e)=>(setEmail(e.target.value))}
             />
             <Input
               label="Username: "
               placeholder="Enter your Username: "
               type="text"
+              // value = {username}
               {...register("Username", {
                 required: true,
               })}
+              onChange = {(e)=>(setUsername(e.target.value))}
             />
             <Input
               label="Password : "
               placeholder="Enter your Password: "
               type="password"
+              // value = {password}
               {...register("password", {
                 required: true,
               })}
+              onChange ={(e)=>(setPassword(e.target.value))}
             />
             <Button
               type="submit"
