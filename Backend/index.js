@@ -24,6 +24,14 @@ console.log("Before cors");
 //     credentials: true,
 //   })
 // );
+
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}))
+
 console.log("After cors");
 
 

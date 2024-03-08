@@ -32,7 +32,7 @@ const Register = () => {
       .then(() => {
         console.log("res");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("fetching error:- ",err));
   };
   return (
     <RegisterDiv>
