@@ -18,21 +18,16 @@ const Register = () => {
     console.log(username);
     console.log(password);
     console.log(email);
-
+    const data = {
+      fullName: fullName,
+      email: email,
+      username: username,
+      password: password,
+    }
     await axios
       .post(
-        "https://play-tube-api.vercel.app/user/register",
-        {
-          fullName: fullName,
-          email: email,
-          username: username,
-          password: password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        "/api/user/register",
+        data
       )
       .then((res) => {
         console.log(res);
