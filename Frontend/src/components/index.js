@@ -4,6 +4,8 @@ import Login from './Login'
 import Register from './Register'
 import Profile from './Profile'
 import History from './History'
+import Input from "./Input";
+import Button from "./Button";
 
 export{
     Navbar,
@@ -11,5 +13,8 @@ export{
     Login,
     Register,
     Profile,
-    History
+    History,
+    Input,
+    Button,
+
 }

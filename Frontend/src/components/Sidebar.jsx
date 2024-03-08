@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import { IoHomeOutline } from 'react-icons/io5';
 import {SiYoutubeshorts} from "react-icons/si";
 import { MdOutlineSubscriptions } from "react-icons/md";
+import { useSelector } from 'react-redux';
 const Sidebar = () => {
     const list = [
         {
           icons: <IoHomeOutline size={"25px"} />,
-          title: <span>Home</span>,
+          title: <p>Home</p>,
         },
         {
           icons: <SiYoutubeshorts size={"25px"} />,
@@ -86,13 +87,15 @@ const Sidebar = () => {
           title: <span>Subscription</span>,
         },
       ];
+      const toggle = useSelector(state=>state.toggle.isClicked)
+
   return (
-    <MainDiv>
+    <MainDiv className={`${toggle ? 'w-20' : 'w-[15%]'} `}>
         {list.map((item,index)=>{
             return(
-                <ItemDiv key={index}>
+                <ItemDiv key={index} className={`flex ${toggle?'flex-col':'flex-row'}`}>
                     {item.icons}
-                    <Field>{item.title}</Field>
+                    <Field className={`${toggle ?'text-sm ml-0 truncate':'ml-10 text-xl'}`}>{item.title}</Field>
                 </ItemDiv>
             )
         })}
@@ -101,10 +104,8 @@ const Sidebar = () => {
 }
 
 const MainDiv = styled.div`
-    z-index: 10;
+    height: 100vh;
     margin-top: 3rem;
-    width: 15%;
-    border: 1px solid rgb(229 231 235/1);
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
@@ -116,15 +117,12 @@ const MainDiv = styled.div`
 `
 
 const ItemDiv = styled.div`
-    display: flex;
-    flex-direction: row;
     margin: 1.25rem;
+    cursor: pointer;
 `
 
 const Field = styled.p`
-    margin-left: 2.5rem;
-    font-size: 1.25rem/* 20px */;
-    line-height: 1.75rem/* 28px */;
+
 
 `
 
