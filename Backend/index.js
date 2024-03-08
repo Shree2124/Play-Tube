@@ -13,15 +13,26 @@ dotenv.config({
   path: './.env'
 })
 
+app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.static("./public/temp"))
+
 app.use(cors({
   origin: "https://play-tube-iota.vercel.app",
   methods: ["GET","PUT","DELETE","UPDATE","PATCH","POST"],
   credentials: true
-}))
+}));
+
+
+
 
 app.get("/", (req, res) => {
   res.send("hello");
 });
+
+// routes:- 
+
+import userRouter from "./routes/user.routes.js";
+app.use("/user",userRouter);
 
 connectDB()
 .then(()=>{console.log("MONGODB connection successfully completed");})
@@ -44,6 +55,8 @@ app.get("/jokes", (req, res) => {
   ];
   res.send(jokes)
 });
+
+
 
 app.listen(Port, () => {
   console.log(`serve at http://localhost:${Port}`);
