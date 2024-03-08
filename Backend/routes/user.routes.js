@@ -8,7 +8,7 @@ import cors from "cors";
 
 app.use(
   cors({
-    origin: ["https://play-tube-iota.vercel.app/"],
+    origin: ["https://play-tube-iota.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
