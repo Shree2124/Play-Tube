@@ -12,15 +12,24 @@ const Register = () => {
 
   const {register,handleSubmit} = useForm();
 
-  const submit = ()=>{
+  const submit = async()=>{
     console.log("hello");
     console.log(fullName);
     console.log(username);
     console.log(password);
     console.log(email);
 
-    axios
-    .get("https://play-tube-api.vercel.app/jokes")
+    await axios
+    .post("https://play-tube-api.vercel.app/user/register",{
+      fullName:fullName,
+      email: email,
+      username: username,
+      password: password,
+    }, {
+      headers: {
+        'Content-Type': "application/json"
+      }
+    })
     .then((res)=>{
       console.log(res);
     })
