@@ -12,22 +12,6 @@ const Register = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const data = {
-    fullName: fullName,
-    email: email,
-    username: username,
-    password: password,
-  }
-
-  useEffect(async ()=>{
-    await axios.post("https://play-tube-api.vercel.app/user/register",data)
-    .then((res)=>{
-      setData(res.data)
-    })
-    .catch((err)=>{
-      console.log("Error:- ",err);
-    })
-  },[submit])
   const submit = () => {
     console.log("hello");
     console.log(fullName);
@@ -35,12 +19,28 @@ const Register = () => {
     console.log(password);
     console.log(email);
   };
+  const data = {
+    fullName: fullName,
+    email: email,
+    username: username,
+    password: password,
+  }
+
+  useEffect( ()=>{
+     axios.post("https://play-tube-api.vercel.app/user/register",data)
+    .then((res)=>{
+      setData(res.data)
+    })
+    .catch((err)=>{
+      console.log("Error:- ",err);
+    })
+  },[submit]);
   return (
     <RegisterDiv>
       <SubDiv>
         <LogoDiv>
           <span>
-            <img src="../asstes/tune-tube.svg" alt="Logo" />
+            {/* <img src="../asstes/tune-tube.svg" alt="Logo" /> */}
           </span>
         </LogoDiv>
         <div className="flex flex-col">
