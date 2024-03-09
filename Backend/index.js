@@ -28,7 +28,8 @@ console.log("Before cors");
 // );
 
 app.use(cors({
-  origin: [process.env.CORS_ORIGIN,"https://play-tube-iota.vercel.app",'http://localhost:5173'],
+  // origin: [process.env.CORS_ORIGIN,"https://play-tube-iota.vercel.app",'http://localhost:5173'],
+  origin: "*",
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true
 }));

@@ -11,24 +11,22 @@ const Register = () => {
   const [email, setEmail] = useState("");
 
   const { register, handleSubmit } = useForm();
-
-  const submit = () => {
-    console.log("hello");
-    console.log(fullName);
-    console.log(username);
-    console.log(password);
-    console.log(email);
-  };
   axios.defaults.withCredentials = true
-  const data = {
+
+  const submit = async() => {
+    const data = {
     fullName: fullName,
     email: email,
     username: username,
     password: password,
   }
+    console.log("hello");
+    console.log(fullName);
+    console.log(username);
+    console.log(password);
+    console.log(email);
 
-  useEffect( ()=>{
-     axios.post("https://play-tube-api.vercel.app/user/register",data)
+    await  axios.post("https://play-tube-api.vercel.app/user/register",data)
     .then((res)=>{
       console.log("Success ");
       setData(res.data)
@@ -36,6 +34,11 @@ const Register = () => {
     .catch((err)=>{
       console.log("Error:- ",err);
     })
+  };
+  
+
+  useEffect( ()=>{
+     
   },[submit]);
   return (
     <RegisterDiv>
