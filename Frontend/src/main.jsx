@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import{ Login, Register } from './components/index.js'
+import{ Dashboard, Login, Register } from './components/index.js'
 import {
   BrowserRouter,
   Route,
@@ -19,6 +19,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App/>}>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/dashboard" element={<Dashboard />}/>
     </Route>
   ));
 ReactDOM.createRoot(document.getElementById("root")).render(

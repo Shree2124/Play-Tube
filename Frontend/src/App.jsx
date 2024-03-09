@@ -10,19 +10,19 @@ function App() {
   const auth = useSelector((state) => state.auth.status);
   const [data, setData] = useState([]);
 
-  useEffect(()=>{
-    axios.get("https://play-tube-api.vercel.app/jokes")
-    .then((res)=>{
-      setData(res.data)
-    })
-    .catch((err)=>{
-      console.log("Error:- ",err);
-    })
-  },[])
+  // useEffect(async ()=>{
+  //   await axios.get("https://play-tube-api.vercel.app/jokes")
+  //   .then((res)=>{
+  //     setData(res.data)
+  //   })
+  //   .catch((err)=>{
+  //     console.log("Error:- ",err);
+  //   })
+  // },[])
 
   return (
     <>
-    <div>
+    {/* <div>
       {
         data.map((joke)=>(
           <>
@@ -31,7 +31,7 @@ function App() {
           </>
         ))
       }
-    </div>
+    </div> */}
     <OutterDiv>
       <Navbar />
       <InnerDiv>

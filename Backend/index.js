@@ -3,6 +3,7 @@ import { PORT } from "./config.js";
 import connectDB from "./db/index.js"
 import dotenv from "dotenv"
 import cors from "cors"
+import cookieParser from "cookie-parser";
 
 const app = express();
 const Port = PORT || 3000;
@@ -15,6 +16,8 @@ dotenv.config({
   path: './.env'
 })
 
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("./public/temp"))
 
@@ -28,7 +31,7 @@ console.log("Before cors");
 // );
 
 app.use(cors({
-  origin: [process.env.CORS_ORIGIN || "*" || "https://play-tube-iota.vercel.app",'http://localhost:5173'],
+  origin: [process.env.CORS_ORIGIN || "*" || "https://play-tube-iota.vercel.app"],
   // origin: "*",
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true

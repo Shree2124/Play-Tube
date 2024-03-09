@@ -6,6 +6,7 @@ import Profile from './Profile'
 import History from './History'
 import Input from "./Input";
 import Button from "./Button";
+import Dashboard from "./Dashboard";
 
 export{
     Navbar,
@@ -16,5 +17,5 @@ export{
     History,
     Input,
     Button,
-
+    Dashboard
 }
