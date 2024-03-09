@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Input, Button } from "../components/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
+  const [flag, setFlag] = useState(false);
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   axios.defaults.withCredentials = true
 
@@ -29,7 +30,13 @@ const Register = () => {
     await  axios.post("https://play-tube-api.vercel.app/user/register",data)
     .then((res)=>{
       console.log("Success ");
-      setData(res.data)
+      console.log(res);
+      if(res){
+        setFlag(true);
+      }
+      if(flag){
+        navigate("/login");
+      }
     })
     .catch((err)=>{
       console.log("Error:- ",err);
