@@ -10,17 +10,17 @@ function App() {
   const auth = useSelector((state) => state.auth.status);
   const [data, setData] = useState([]);
 
-  const connection = async ()=>{
-    await axios.get("https://play-tube-api.vercel.app/jokes")
-    .then((res)=>{
-      setData(res.data)
-      console.log(data);
-    })
-    .catch((err)=>{
-      console.log("Error:- ",err);
-    })
-  }
-  connection()
+  // const connection = async ()=>{
+  //   await axios.get("https://play-tube-api.vercel.app/jokes")
+  //   .then((res)=>{
+  //     setData(res.data)
+  //     console.log(data);
+  //   })
+  //   .catch((err)=>{
+  //     console.log("Error:- ",err);
+  //   })
+  // }
+  // connection()
 
   return (
     <>
