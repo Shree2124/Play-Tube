@@ -21,22 +21,17 @@ const Register = () => {
     username: username,
     password: password,
   }
-    console.log("hello");
-    console.log(fullName);
-    console.log(username);
-    console.log(password);
-    console.log(email);
+    // console.log("hello");
+    // console.log(fullName);
+    // console.log(username);
+    // console.log(password);
+    // console.log(email);
 
     await  axios.post("https://play-tube-api.vercel.app/user/register",data)
     .then((res)=>{
       console.log("Success ");
-      console.log(res);
-      if(res){
-        setFlag(true);
-      }
-      if(flag){
-        navigate("/login");
-      }
+      // console.log(res);
+      navigate("/login");
     })
     .catch((err)=>{
       console.log("Error:- ",err);
