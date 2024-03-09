@@ -7,7 +7,9 @@ import cors from "cors"
 const app = express();
 const Port = PORT || 3000;
 
-app.use(express.json());
+const a = app.use(express.json());
+
+console.log(a);
 
 dotenv.config({
   path: './.env'
@@ -26,7 +28,7 @@ console.log("Before cors");
 // );
 
 app.use(cors({
-  origin: ["https://play-tube-iota.vercel.app"],
+  origin: [process.env.CORS_ORIGIN,"https://play-tube-iota.vercel.app",'http://localhost:5173'],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true
 }));
@@ -34,15 +36,15 @@ app.use(cors({
 console.log("After cors");
 
 
-
+import userRouter from "./routes/user.routes.js";
+app.use("/user",userRouter);
 app.get("/", (req, res) => {
   res.send("hello");
 });
 
 // routes:- 
 
-import userRouter from "./routes/user.routes.js";
-app.use("/user",userRouter);
+
 
 connectDB()
 .then(()=>{console.log("MONGODB connection successfully completed");})
