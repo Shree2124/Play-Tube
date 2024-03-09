@@ -31,10 +31,13 @@ console.log("Before cors");
 // );
 
 app.use(cors({
-  origin: [process.env.CORS_ORIGIN || "*" || "https://play-tube-iota.vercel.app"],
-  // origin: "*",
-  methods: ["POST", "GET", "PUT", "DELETE"],
-  credentials: true
+  origin: 'https://play-tube-iota.vercel.app' || "*" || process.env.CORS_ORIGIN,// Replace with your frontend's origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  exposedHeaders: 'Content-Length,Content-Range',
+  credentials: true,
+  maxAge: 86400, // 1 day
+  optionsSuccessStatus: 204,
 }));
 
 console.log("After cors");
