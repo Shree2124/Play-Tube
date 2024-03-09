@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Input, Button } from "../components/index";
 import { useForm } from "react-hook-form";
@@ -11,8 +11,9 @@ const Login = () => {
   // const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   axios.defaults.withCredentials = true
-  
+
   const submit = async() => {
     const data = {
     email: email,
