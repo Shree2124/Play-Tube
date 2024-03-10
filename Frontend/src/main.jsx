@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import{ Login, Register } from './components/index.js'
+import{ Login, Register, VideoContainer } from './components/index.js'
 import {
   BrowserRouter,
   Route,
@@ -17,6 +17,7 @@ import { store } from "./redux/store/store.js";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App/>}>
+        <Route index element={<VideoContainer/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
     </Route>
