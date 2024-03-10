@@ -1,20 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import {Input,Button} from '../components/index'
-import { Link } from "react-router-dom";
+import { Input, Button } from "../components/index";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const Register = () => {
-  const {register,handleSubmit} = useForm();
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [flag, setFlag] = useState(false);
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+  axios.defaults.withCredentials = true
 
-  const submit = ()=>{
-    console.log("hello");
+  const submit = async() => {
+    const data = {
+    fullName: fullName,
+    email: email,
+    username: username,
+    password: password,
   }
+    // console.log("hello");
+    // console.log(fullName);
+    // console.log(username);
+    // console.log(password);
+    // console.log(email);
+
+    await  axios.post("https://play-tube-api.vercel.app/user/register",data)
+    .then((res)=>{
+      console.log("Success ");
+      // console.log(res);
+      navigate("/login");
+    })
+    .catch((err)=>{
+      console.log("Error:- ",err);
+    })
+  };
+  
+
+  useEffect( ()=>{
+     
+  },[submit]);
   return (
     <RegisterDiv>
       <SubDiv>
         <LogoDiv>
           <span>
-            <img src="../asstes/tune-tube.svg" alt="Logo" />
+            {/* <img src="../asstes/tune-tube.svg" alt="Logo" /> */}
           </span>
         </LogoDiv>
         <div className="flex flex-col">
@@ -26,20 +59,25 @@ const Register = () => {
             </p>
           </div>
         </div>
-        <Form onSubmit={handleSubmit(()=>submit())}>
+        <Form onSubmit={handleSubmit(() => submit())}>
           <ContentDiv>
             <Input
               label="Fullname: "
               placeholder="Enter your Fullname: "
+              // value = {fullName}
               type="text"
               {...register("fullname", {
                 required: true,
               })}
+              onChange={(e) => {
+                setFullName(e.target.value);
+              }}
             />
             <Input
               label="Email: "
               placeholder="Enter your Email: "
               type="email"
+              // value = {email}
               {...register("email", {
                 required: true,
                 validate: {
@@ -48,22 +86,27 @@ const Register = () => {
                     "Email address must be a valid address",
                 },
               })}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               label="Username: "
               placeholder="Enter your Username: "
               type="text"
+              // value = {username}
               {...register("Username", {
                 required: true,
               })}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <Input
               label="Password : "
               placeholder="Enter your Password: "
               type="password"
+              // value = {password}
               {...register("password", {
                 required: true,
               })}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"

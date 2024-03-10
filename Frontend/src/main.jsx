@@ -20,6 +20,7 @@ const router = createBrowserRouter(
         <Route index element={<VideoContainer/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/dashboard" element={<Dashboard />}/>
     </Route>
   ));
 ReactDOM.createRoot(document.getElementById("root")).render(

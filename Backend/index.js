@@ -3,25 +3,55 @@ import { PORT } from "./config.js";
 import connectDB from "./db/index.js"
 import dotenv from "dotenv"
 import cors from "cors"
+import cookieParser from "cookie-parser";
 
 const app = express();
 const Port = PORT || 3000;
 
-app.use(express.json());
+const a = app.use(express.json());
+
+console.log(a);
 
 dotenv.config({
   path: './.env'
 })
 
-app.use(cors({
-  origin: "https://play-tube-iota.vercel.app",
-  methods: ["GET","PUT","DELETE","UPDATE","PATCH","POST"],
-  credentials: true
-}))
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.static("./public/temp"))
 
+// const CORS_ORIGIN = '*'
+console.log("Before cors");
+// app.use(
+//   cors({
+//     origin: process.env.CORS_ORIGIN,
+//     credentials: true,
+//   })
+// );
+
+app.use(cors({
+  origin: 'https://play-tube-iota.vercel.app' || "*" || process.env.CORS_ORIGIN,// Replace with your frontend's origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  exposedHeaders: 'Content-Length,Content-Range',
+  credentials: true,
+  maxAge: 86400, // 1 day
+  optionsSuccessStatus: 204,
+}));
+
+console.log("After cors");
+
+
+import userRouter from "./routes/user.routes.js";
+app.use("/user",userRouter);
 app.get("/", (req, res) => {
   res.send("hello");
 });
+
+// routes:- 
+
+
 
 connectDB()
 .then(()=>{console.log("MONGODB connection successfully completed");})
@@ -44,6 +74,8 @@ app.get("/jokes", (req, res) => {
   ];
   res.send(jokes)
 });
+
+
 
 app.listen(Port, () => {
   console.log(`serve at http://localhost:${Port}`);

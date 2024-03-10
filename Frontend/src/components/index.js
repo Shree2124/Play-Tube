@@ -6,7 +6,11 @@ import Profile from './Profile'
 import History from './History'
 import Input from "./Input";
 import Button from "./Button";
+
 import VideoContainer from "./VideoContainer";
+
+import Dashboard from "./Dashboard";
+
 
 export{
     Navbar,

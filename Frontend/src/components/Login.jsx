@@ -1,15 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useState, useEffect} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Input, Button } from "../components/index";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { SiHellofresh } from "react-icons/si";
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const [username, setUsername] = useState("");
+  // const [fullName, setFullName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  axios.defaults.withCredentials = true
 
-  const submit = () =>{
-    console.log('hello');
+  const submit = async() => {
+    const data = {
+    email: email,
+    username: username,
+    password: password,
   }
+    // console.log("hello");
+    // console.log(fullName);
+    console.log(username);
+    console.log(password);
+    console.log(email);
+
+    await  axios.post("https://play-tube-api.vercel.app/user/login",data)
+    .then((res)=>{
+      console.log("Success ");
+      console.log(res);
+      navigate("/dashboard");
+    })
+    .catch((err)=>{
+      console.log("Error:- ",err);
+    })
+  };
   return (
     <LoginDiv>
       <SubDiv>
@@ -41,6 +67,9 @@ const Login = () => {
                     "Email address must be a valid address",
                 },
               })}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <Input
               label="Username: "
@@ -49,6 +78,9 @@ const Login = () => {
               {...register("Username", {
                 required: true,
               })}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
             />
             <Input
               label="Password : "
@@ -57,6 +89,9 @@ const Login = () => {
               {...register("password", {
                 required: true,
               })}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <Button
               type="submit"
