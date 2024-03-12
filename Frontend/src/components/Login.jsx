@@ -30,7 +30,6 @@ const Login = () => {
     .then((res)=>{
       console.log("Success ");
       console.log(res);
-      navigate("/dashboard");
     })
     .catch((err)=>{
       console.log("Error:- ",err);
