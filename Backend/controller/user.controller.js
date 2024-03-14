@@ -3,13 +3,13 @@ import { apiError } from "../utils/apiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 // import { uploadOnCloudinary } from "../middlewares/multer.middleware.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
-import {  apiResponse } from "../utils/apiResponce.js";
+import { apiResponse } from "../utils/apiResponce.js";
 import { headerOptions } from "../config.js";
 
 const generateAccessAndRefereshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
-    const accessToken = user.generateAccessToken(); 
+    const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
@@ -53,35 +53,35 @@ const registerUser = asyncHandler(async (req, res) => {
   }
   //console.log(req.files);
 
-//   const avatarLocalPath = req?.files?.avatar[0]?.path;
-//const coverImageLocalPath = req.files?.coverImage[0]?.path;
-// let avatarLocalPath;
-//   let coverImageLocalPath;
-//   if (
-//     req.files &&
-//     Array.isArray(req.files.coverImage) &&
-//     req.files.coverImage.length > 0
-//   ) {
-//     coverImageLocalPath = req.files.coverImage[0]?.path;
-//   }
-//   if (
-//     req.files &&
-//     Array.isArray(req.files.avatar) &&
-//     req.files.avatar.length > 0
-//   ) {
-//     avatarLocalPath = req.files.avatar[0]?.path;
-//   }
+  //   const avatarLocalPath = req?.files?.avatar[0]?.path;
+  //const coverImageLocalPath = req.files?.coverImage[0]?.path;
+  // let avatarLocalPath;
+  //   let coverImageLocalPath;
+  //   if (
+  //     req.files &&
+  //     Array.isArray(req.files.coverImage) &&
+  //     req.files.coverImage.length > 0
+  //   ) {
+  //     coverImageLocalPath = req.files.coverImage[0]?.path;
+  //   }
+  //   if (
+  //     req.files &&
+  //     Array.isArray(req.files.avatar) &&
+  //     req.files.avatar.length > 0
+  //   ) {
+  //     avatarLocalPath = req.files.avatar[0]?.path;
+  //   }
 
-//   if (!avatarLocalPath) {
-//     throw new apiError(400, "Avatar file is required");
-//   }
+  //   if (!avatarLocalPath) {
+  //     throw new apiError(400, "Avatar file is required");
+  //   }
 
-//   const avatar = await uploadOnCloudinary(avatarLocalPath);
-//   const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+  //   const avatar = await uploadOnCloudinary(avatarLocalPath);
+  //   const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
-//   if (!avatar) {
-//     throw new apiError(400, "Avatar file is required");
-//   }
+  //   if (!avatar) {
+  //     throw new apiError(400, "Avatar file is required");
+  //   }
 
   const user = await User.create({
     fullName,
@@ -163,4 +163,24 @@ const loginUser = asyncHandler(async (req, res) => {
     );
 });
 
-export { registerUser, loginUser };
+const logoutUser = asyncHandler(async (req, res) => {
+  await User.findOneAndUpdate(
+    req.user._id,
+    {
+      $unset: {
+        refreshToken: 1,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+
+  res
+    .status(200)
+    .clearCookie("refreshToken", headerOptions)
+    .clearCookie("accessToken", headerOptions)
+    .json(new apiResponse(200, {}, "User logged out"));
+});
+
+export { registerUser, loginUser, logoutUser };

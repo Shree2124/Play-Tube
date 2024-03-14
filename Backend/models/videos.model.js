@@ -15,7 +15,7 @@ const videoSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    thubnail: {
+    thumbnail: {
       type: String,
       required: true,
     },
