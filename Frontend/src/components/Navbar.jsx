@@ -22,7 +22,7 @@ const Navbar = ({ darkTheme, setDarkTheme }) => {
     <Container>
       <Section>
         <IconAndLogoSection>
-          <RxHamburgerMenu size={"30px"} onClick={handleClick} />
+          <RxHamburgerMenu size={"42px"} onClick={handleClick} />
           <Link>
             <Logo>
               <LogoImage src={YTLogo} alt="Logo" />
@@ -93,10 +93,11 @@ const Section = styled.div`
 `;
 
 const IconAndLogoSection = styled.div`
+  margin: 1rem 0 0 1rem;
   display: flex;
   justify-content: center;
-  align-items: start;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
   margin-left: 0.75rem;
   background-color: ${({ theme }) => theme.bgLighter};
 `;
