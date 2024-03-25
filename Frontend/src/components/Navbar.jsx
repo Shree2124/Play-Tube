@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle } from "../redux/features/toggleSlice";
 
-const Navbar = () => {
+const Navbar = ({darkTheme, setDarkTheme}) => {
   const toggle = useSelector((state) => state.toggle.isClicked);
   const auth = useSelector((state) => state.auth.status);
   const dispatch = useDispatch();
@@ -60,10 +60,9 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   z-index: 10;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.bgLighter};
   min-width: 10px;
-
-
+  color: ${({ theme }) => theme.text};
 `;
 
 const Section = styled.div`
@@ -91,6 +90,7 @@ const IconAndLogoSection = styled.div`
   align-items: start;
   gap: 1rem;
   margin-left: 0.75rem;
+  background-color: ${({ theme }) => theme.bgLighter};
 `;
 
 const LogoImage = styled.img`
@@ -119,6 +119,7 @@ const Input = styled.input`
   border: none;
   width: 100%;
   font-size: 15px;
+  background-color: ${({ theme }) => theme.bgLighter};
   &:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
@@ -144,11 +145,11 @@ const AuthenticationButtons = styled.div`
 const LoginButton = styled(Link)`
   text-decoration: none;
   padding: 0.2rem 0.75rem;
-  border: 1px solid #fff;
+  border: 1px solid ${({ theme }) => theme.text};
   border-radius: 2.5rem;
   font-size: 20px;
-  background-color: #bfbcbf52;
-  color: black;
+  background-color: ${({ theme }) => theme.bgLighter};
+  color: ${({ theme }) => theme.text};
   &:hover {
     background-color: gray;
     color: white;
@@ -159,11 +160,11 @@ const LoginButton = styled(Link)`
 const SignupButton = styled(Link)`
   text-decoration: none;
   padding: 0.2rem 1rem;
-  border: 1px solid #fff;
+  border: 1px solid ${({ theme }) => theme.text};
   border-radius: 2.5rem;
   font-size: 20px;
-  background-color: #bfbcbf52;
-  color: black;
+  background-color: ${({ theme }) => theme.bgLighter};
+  color: ${({ theme }) => theme.text};
   &:hover {
     background-color: gray;
     color: white;

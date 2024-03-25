@@ -1,14 +1,17 @@
 import "./App.css";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { Navbar, Sidebar } from "./components";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import VideoContainer from "./components/VideoContainer";
 import { useEffect, useState } from "react";
+import { darkTheme, lightTheme } from "./utils/Theme.js";
 import axios from "axios";
+
 function App() {
   const auth = useSelector((state) => state.auth.status);
   const [data, setData] = useState([]);
+  const [darkMode, setDarkMode] = useState(true);
 
   // const connection = async ()=>{
   //   await axios.get("https://play-tube-api.vercel.app/jokes")
@@ -24,7 +27,7 @@ function App() {
 
   return (
     <>
-    {/* <div>
+      {/* <div>
       {
         data.map((joke)=>(
           <>
@@ -34,15 +37,17 @@ function App() {
         ))
       }
     </div> */}
-    <OutterDiv>
-      <Navbar />
-      <InnerDiv>
-        <Sidebar />
-        <OutletDiv>
-          <Outlet />
-        </OutletDiv>
-      </InnerDiv>
-    </OutterDiv>
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <OutterDiv>
+          <Navbar />
+          <InnerDiv>
+            <Sidebar darkMode={darkMode} setDarkMode={setDarkMode} />
+            <OutletDiv>
+              <Outlet />
+            </OutletDiv>
+          </InnerDiv>
+        </OutterDiv>
+      </ThemeProvider>
     </>
   );
 }
@@ -56,11 +61,26 @@ const InnerDiv = styled.div`
 `;
 
 const OutletDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  height: 100vh;
   width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  background-color: ${({ theme }) => theme.bgLighter};
+
+  &::-webkit-scrollbar {
+    width: 0px; /* Adjust as needed */
+  }
+
+  &:hover::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #313131;
+    background-color: ${({ theme }) =>
+      theme.scrollBar}; /* Color of scrollbar thumb */
+  }
 `;
 
 export default App;
