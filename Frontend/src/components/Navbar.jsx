@@ -3,13 +3,14 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearch } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineVideoCall } from "react-icons/md";
-import Avatar from 'react-avatar';
+import Avatar from "react-avatar";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle } from "../redux/features/toggleSlice";
+import YTLogo from "../assets/logo-color.png";
 
-const Navbar = ({darkTheme, setDarkTheme}) => {
+const Navbar = ({ darkTheme, setDarkTheme }) => {
   const toggle = useSelector((state) => state.toggle.isClicked);
   const auth = useSelector((state) => state.auth.status);
   const dispatch = useDispatch();
@@ -22,7 +23,12 @@ const Navbar = ({darkTheme, setDarkTheme}) => {
       <Section>
         <IconAndLogoSection>
           <RxHamburgerMenu size={"30px"} onClick={handleClick} />
-          <LogoImage src="../assets/tune-tube.svg" alt="Logo" />
+          <Link>
+            <Logo>
+              <LogoImage src={YTLogo} alt="Logo" />
+              <p>TUNE TUBE</p>
+            </Logo>
+          </Link>
         </IconAndLogoSection>
         <InputandSearchSection>
           <InputSection>
@@ -63,6 +69,8 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.bgLighter};
   min-width: 10px;
   color: ${({ theme }) => theme.text};
+  box-shadow: ${({theme})=>theme.boxShadow};
+  /* border: 2px solid white; */
 `;
 
 const Section = styled.div`
@@ -72,16 +80,16 @@ const Section = styled.div`
   width: 100%;
   position: relative;
   gap: 20rem;
-  @media only screen and (min-width:480px) and (max-width:768px){
-  width: 50%;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    width: 50%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-@media only screen and (max-width:478px){
- /* flex-wrap: wrap; */
- gap: 1rem;
-}
+  @media only screen and (max-width: 478px) {
+    /* flex-wrap: wrap; */
+    gap: 1rem;
+  }
 `;
 
 const IconAndLogoSection = styled.div`
@@ -94,10 +102,16 @@ const IconAndLogoSection = styled.div`
 `;
 
 const LogoImage = styled.img`
-  width: 115px;
-  height: 6px;
-  margin: 0;
-  padding: 0;
+  height: 7vh;
+  width: 7vh;
+`;
+
+const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const InputandSearchSection = styled.div`

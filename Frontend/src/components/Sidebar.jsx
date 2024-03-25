@@ -222,6 +222,7 @@ const Container = styled.div`
   color: ${({ theme }) => theme.text};
   bottom: 0;
   background-color: ${({ theme }) => theme.bgLighter};
+  
 
   &::-webkit-scrollbar {
     width: 0px; /* Adjust as needed */
